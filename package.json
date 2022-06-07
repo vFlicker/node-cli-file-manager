@@ -6,6 +6,7 @@
     "node": ">=16.0.0"
   },
   "scripts": {
+    "start": "npm run start -- --username=your_username",
     "check:eslint": "eslint . --ext .js --fix",
     "test": "npm run check:eslint"
   },
