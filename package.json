@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-file-manager",
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "check:eslint": "eslint . --ext .js --fix",
+    "test": "npm run check:eslint"
+  },
+  "author": "vFlicker",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "8.16.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "prettier": "2.6.2"
+  }
+}
