@@ -4,16 +4,16 @@ import {
   getUserName,
   parseChunkToCommand,
   stdoutText,
-  writeToStdout,
+  write,
 } from './utils/index.js';
 
 export const app = (argv) => {
   const userName = getUserName(argv);
-  writeToStdout(stdoutText.sayHello(userName));
-  writeToStdout(stdoutText.sayCurrentlyDirectory('path_to_working_directory'));
+  write(stdoutText.sayHello(userName));
+  write(stdoutText.sayCurrentlyDirectory('path_to_working_directory'));
 
   process.on('SIGINT', () => {
-    writeToStdout(stdoutText.sayGoodbye(userName));
+    write(stdoutText.sayGoodbye(userName));
     exit();
   });
 

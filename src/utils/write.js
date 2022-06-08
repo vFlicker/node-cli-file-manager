@@ -1,5 +1,5 @@
 import { EOL } from 'os';
 
-export const writeToStdout = (text) => {
+export const write = (text) => {
   process.stdout.write(text + EOL);
 };
