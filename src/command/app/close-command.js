@@ -1,7 +1,7 @@
-import { exit, stdoutText, write } from '../utils/index.js';
-import { AbstractCommand } from './abstract-command.js';
+import { exit, stdoutText, write } from '../../utils/index.js';
+import { AbstractCommand } from '../abstract-command.js';
 
-export class CloseAppCommand extends AbstractCommand {
+export class CloseCommand extends AbstractCommand {
   #userName = '';
 
   constructor(userName) {

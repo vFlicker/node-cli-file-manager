@@ -1,9 +1,10 @@
-import { CloseAppCommand } from './command/index.js';
+import { app, navigate } from './command/index.js';
 import { stdoutText, write } from './utils/index.js';
 
 export const core = (commandName, userName) => {
   const commands = new Map();
-  commands.set(CloseAppCommand.commandName, new CloseAppCommand(userName));
+  commands.set(app.CloseCommand.commandName, new app.CloseCommand(userName));
+  commands.set(navigate.UpCommand.commandName, new navigate.UpCommand());
   const command = commands.get(commandName);
 
   if (!command) {
