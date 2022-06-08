@@ -19,8 +19,8 @@ export const app = (argv) => {
     output: process.stdout,
   });
 
-  readline.on('line', (command) => {
-    core(command, userName);
+  readline.on('line', (line) => {
+    core(line, userName);
   });
 
   readline.on('close', () => {
