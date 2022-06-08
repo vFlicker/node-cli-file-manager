@@ -5,6 +5,7 @@ export const core = (commandName, userName) => {
   const commands = new Map();
   commands.set(app.CloseCommand.commandName, new app.CloseCommand(userName));
   commands.set(navigate.UpCommand.commandName, new navigate.UpCommand());
+  commands.set(navigate.LsCommand.commandName, new navigate.LsCommand());
   const command = commands.get(commandName);
 
   if (!command) {
