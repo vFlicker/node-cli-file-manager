@@ -10,6 +10,7 @@ import {
 export const app = (argv) => {
   const userName = getUserName(argv);
   writeToStdout(stdoutText.sayHello(userName));
+  writeToStdout(stdoutText.sayCurrentlyDirectory('path_to_working_directory'));
 
   process.on('SIGINT', () => {
     writeToStdout(stdoutText.sayGoodbye(userName));
