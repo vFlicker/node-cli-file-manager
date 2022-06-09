@@ -1,4 +1,4 @@
-import { stdoutText, write } from '../../utils/index.js';
+import { changeDir, stdoutText, write } from '../../utils/index.js';
 import { AbstractCommand } from '../abstract-command.js';
 
 export class CdCommand extends AbstractCommand {
@@ -14,9 +14,9 @@ export class CdCommand extends AbstractCommand {
     return 'cd';
   }
 
-  execute() {
+  async execute() {
     try {
-      process.chdir(this.#path);
+      changeDir(this.#path);
     } catch (err) {
       write(stdoutText.sayFailed());
     }

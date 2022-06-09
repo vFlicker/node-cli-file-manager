@@ -9,7 +9,7 @@ export class AbstractCommand {
     throw new Error('Abstract method not implemented: commandName');
   }
 
-  execute() {
+  async execute() {
     throw new Error('Abstract method not implemented: execute');
   }
 }

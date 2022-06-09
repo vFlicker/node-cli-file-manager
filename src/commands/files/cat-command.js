@@ -23,9 +23,7 @@ export class CatCommand extends AbstractCommand {
     const readableStream = createReadStream(filePath, 'utf8');
 
     try {
-      for await (const line of readableStream) {
-        write(line);
-      }
+      for await (const line of readableStream) write(line);
     } catch (error) {
       write(stdoutText.sayFailed());
     }

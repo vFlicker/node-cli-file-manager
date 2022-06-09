@@ -1,4 +1,4 @@
-import { app, files, navigate } from './command/index.js';
+import { app, files, navigate } from './commands/index.js';
 import { getWorkingDirectory, stdoutText, write } from './utils/index.js';
 
 export const core = async (line, userName) => {

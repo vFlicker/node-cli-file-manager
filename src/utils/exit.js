@@ -1,4 +1,5 @@
-export const exit = () => {
-  const exit = process.exit;
+import { exit } from 'process';
+
+export const closeApp = () => {
   exit();
 };

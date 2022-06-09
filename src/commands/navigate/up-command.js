@@ -1,3 +1,4 @@
+import { changeDir } from '../../utils/index.js';
 import { AbstractCommand } from '../abstract-command.js';
 
 export class UpCommand extends AbstractCommand {
@@ -5,7 +6,7 @@ export class UpCommand extends AbstractCommand {
     return 'up';
   }
 
-  execute() {
-    process.chdir('../');
+  async execute() {
+    changeDir('..');
   }
 }

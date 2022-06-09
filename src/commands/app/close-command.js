@@ -1,4 +1,4 @@
-import { exit, stdoutText, write } from '../../utils/index.js';
+import { closeApp, stdoutText, write } from '../../utils/index.js';
 import { AbstractCommand } from '../abstract-command.js';
 
 export class CloseCommand extends AbstractCommand {
@@ -14,8 +14,8 @@ export class CloseCommand extends AbstractCommand {
     return '.exit';
   }
 
-  execute() {
+  async execute() {
     write(stdoutText.sayGoodbye(this.#userName));
-    exit();
+    closeApp();
   }
 }

@@ -1,7 +1,8 @@
-import { homedir } from 'os';
+import { argv } from 'process';
 
 import { app } from './app.js';
+import { setHomeDir } from './utils/index.js';
 
 // INIT
-process.chdir(homedir());
-app(process.argv);
+setHomeDir();
+app(argv);

@@ -1,8 +1,9 @@
+import { stdin, stdout } from 'process';
 import { createInterface } from 'readline';
 
 import { core } from './core.js';
 import {
-  exit,
+  closeApp,
   getWorkingDirectory,
   getUserName,
   stdoutText,
@@ -15,8 +16,8 @@ export const app = (argv) => {
   write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
 
   const readline = createInterface({
-    input: process.stdin,
-    output: process.stdout,
+    input: stdin,
+    output: stdout,
   });
 
   readline.on('line', (line) => {
@@ -25,6 +26,6 @@ export const app = (argv) => {
 
   readline.on('close', () => {
     write(stdoutText.sayGoodbye(userName));
-    exit();
+    closeApp();
   });
 };
