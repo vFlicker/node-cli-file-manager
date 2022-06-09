@@ -1,31 +1,47 @@
-import { stdin, stdout } from 'process';
+import { stdin as input, stdout as output } from 'process';
 import { createInterface } from 'readline';
+import { createCommands } from './commands/index.js';
 
-import { core } from './core.js';
 import {
   closeApp,
   getWorkingDirectory,
   getUserName,
+  setHomeDir,
   stdoutText,
   write,
 } from './utils/index.js';
 
-export const app = (argv) => {
-  const userName = getUserName(argv);
+const init = (userName) => {
+  setHomeDir();
   write(stdoutText.sayHello(userName));
   write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
+};
 
-  const readline = createInterface({
-    input: stdin,
-    output: stdout,
-  });
+const handleAppInput = (userName) => async (line) => {
+  const [commandName, ...commandData] = line.split(' ');
+  const commands = createCommands(userName, commandData);
+  const command = commands.get(commandName);
 
-  readline.on('line', (line) => {
-    core(line, userName);
-  });
+  if (!command) {
+    write(stdoutText.sayInvalidInput(commandName));
+  } else {
+    await command.execute();
+  }
 
-  readline.on('close', () => {
-    write(stdoutText.sayGoodbye(userName));
-    closeApp();
-  });
+  write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
+};
+
+const handleAppClose = (userName) => () => {
+  write(stdoutText.sayGoodbye(userName));
+  closeApp();
+};
+
+export const app = (argv) => {
+  const userName = getUserName(argv);
+  const readline = createInterface({ input, output });
+
+  init(userName);
+
+  readline.on('line', handleAppInput(userName));
+  readline.on('close', handleAppClose(userName));
 };

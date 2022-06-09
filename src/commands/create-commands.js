@@ -1,10 +1,13 @@
-import { app, files, navigate } from './commands/index.js';
-import { getWorkingDirectory, stdoutText, write } from './utils/index.js';
+import * as app from './app/index.js';
+import * as files from './files/index.js';
+// import * as hash from './hash/index.js';
+import * as navigate from './navigate/index.js';
+// import * as os from './os/index.js';
+// import * as zip from './zip/index.js';
 
-export const core = async (line, userName) => {
-  const [commandName, ...commandData] = line.split(' ');
-
+export const createCommands = (userName, commandData) => {
   const commands = new Map();
+
   // App
   commands.set(app.CloseCommand.commandName, new app.CloseCommand(userName));
 
@@ -18,14 +21,5 @@ export const core = async (line, userName) => {
   commands.set(files.CatCommand.commandName, new files.CatCommand(commandData));
   commands.set(files.RnCommand.commandName, new files.RnCommand(commandData));
 
-  const command = commands.get(commandName);
-
-  if (!command) {
-    write(stdoutText.sayInvalidInput(commandName));
-    write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
-    return;
-  }
-
-  await command.execute();
-  write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
+  return commands;
 };
