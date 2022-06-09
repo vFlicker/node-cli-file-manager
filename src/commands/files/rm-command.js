@@ -1,30 +1,27 @@
 import path from 'path';
-import { copyFile } from 'node:fs/promises';
+import { unlink } from 'node:fs/promises';
 
 import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
 import { AbstractCommand } from '../abstract-command.js';
 
-export class CpCommand extends AbstractCommand {
+export class RmCommand extends AbstractCommand {
   #filePath = '';
-  #newFilePath = '';
 
-  constructor([filePath, newFilePath]) {
+  constructor([filePath]) {
     super();
 
     this.#filePath = filePath;
-    this.#newFilePath = newFilePath;
   }
 
   static get commandName() {
-    return 'cp';
+    return 'rm';
   }
 
   async execute() {
     try {
       const workingDirectory = getWorkingDirectory();
       const filePath = path.resolve(workingDirectory, this.#filePath);
-      const newFilePath = path.resolve(workingDirectory, this.#newFilePath);
-      await copyFile(filePath, newFilePath);
+      await unlink(filePath);
     } catch (err) {
       write(stdoutText.sayFailed());
     }

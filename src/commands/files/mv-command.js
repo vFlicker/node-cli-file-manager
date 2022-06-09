@@ -27,7 +27,6 @@ export class MvCommand extends AbstractCommand {
       await copyFile(filePath, newFilePath);
       await unlink(filePath);
     } catch (err) {
-      console.log(err);
       write(stdoutText.sayFailed());
     }
   }

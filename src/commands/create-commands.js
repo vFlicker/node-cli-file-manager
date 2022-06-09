@@ -21,6 +21,7 @@ export const createCommands = (userName, commandData) => {
   commands.set(files.CatCommand.commandName, new files.CatCommand(commandData));
   commands.set(files.CpCommand.commandName, new files.CpCommand(commandData));
   commands.set(files.MvCommand.commandName, new files.MvCommand(commandData));
+  commands.set(files.RmCommand.commandName, new files.RmCommand(commandData));
   commands.set(files.RnCommand.commandName, new files.RnCommand(commandData));
 
   return commands;
