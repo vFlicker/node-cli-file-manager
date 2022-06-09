@@ -14,6 +14,7 @@ export const core = async (line, userName) => {
   commands.set(navigate.UpCommand.commandName, new navigate.UpCommand());
 
   // File
+  commands.set(files.AddCommand.commandName, new files.AddCommand(commandData));
   commands.set(files.CatCommand.commandName, new files.CatCommand(commandData));
 
   const command = commands.get(commandName);
