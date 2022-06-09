@@ -16,10 +16,11 @@ export const createCommands = (userName, commandData) => {
   commands.set(navigate.LsCommand.commandName, new navigate.LsCommand());
   commands.set(navigate.UpCommand.commandName, new navigate.UpCommand());
 
-  // File
+  // Files
   commands.set(files.AddCommand.commandName, new files.AddCommand(commandData));
   commands.set(files.CatCommand.commandName, new files.CatCommand(commandData));
   commands.set(files.CpCommand.commandName, new files.CpCommand(commandData));
+  commands.set(files.MvCommand.commandName, new files.MvCommand(commandData));
   commands.set(files.RnCommand.commandName, new files.RnCommand(commandData));
 
   return commands;
