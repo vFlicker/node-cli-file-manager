@@ -19,6 +19,7 @@ export const createCommands = (userName, commandData) => {
   // File
   commands.set(files.AddCommand.commandName, new files.AddCommand(commandData));
   commands.set(files.CatCommand.commandName, new files.CatCommand(commandData));
+  commands.set(files.CpCommand.commandName, new files.CpCommand(commandData));
   commands.set(files.RnCommand.commandName, new files.RnCommand(commandData));
 
   return commands;
