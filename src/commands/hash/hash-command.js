@@ -23,9 +23,9 @@ export class HashCommand extends AbstractCommand {
       const workingDirectory = getWorkingDirectory();
       const filePath = path.resolve(workingDirectory, this.#filePath);
       const hash = createHash('sha256');
-      const readableStream = createReadStream(filePath);
-      readableStream.on('data', (chunk) => hash.update(chunk));
-      readableStream.on('end', () => write(hash.digest('hex')));
+      const readable = createReadStream(filePath);
+      readable.on('data', (chunk) => hash.update(chunk));
+      readable.on('end', () => write(hash.digest('hex')));
     } catch (err) {
       write(stdoutText.sayFailed());
     }
