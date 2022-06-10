@@ -1,6 +1,11 @@
 import { arch, cpus as getCPUs, EOL, userInfo } from 'os';
 
-import { HOME_DIR, stdoutText, write, writeInTable } from '../../utils/index.js';
+import {
+  HOME_DIR,
+  stdoutText,
+  write,
+  writeInTable,
+} from '../../utils/index.js';
 import { AbstractCommand } from '../abstract-command.js';
 
 export class OsCommand extends AbstractCommand {
@@ -23,7 +28,7 @@ export class OsCommand extends AbstractCommand {
         break;
       case '--cpus': {
         const [cpus, CPUsCount] = this.#getCPUs();
-        write(`Overall amount of CPUS: ${CPUsCount}`);
+        write(`Overall amount of CPUs: ${CPUsCount}`);
         writeInTable(cpus);
         break;
       }

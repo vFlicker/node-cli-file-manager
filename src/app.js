@@ -17,9 +17,9 @@ const init = (userName) => {
   write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
 };
 
-const handleAppInput = (userName) => async (line) => {
+const appInputHandler = async (line) => {
   const [commandName, ...commandData] = line.split(' ');
-  const commands = createCommands(userName, commandData);
+  const commands = createCommands(commandData);
   const command = commands.get(commandName);
 
   if (!command) {
@@ -31,17 +31,17 @@ const handleAppInput = (userName) => async (line) => {
   write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
 };
 
-const handleAppClose = (userName) => () => {
+const appCloseHandler = (userName) => () => {
   write(stdoutText.sayGoodbye(userName));
   closeApp();
 };
 
-export const app = (argv) => {
-  const userName = getUserName(argv);
+export const app = () => {
+  const userName = getUserName();
   const readline = createInterface({ input, output });
 
   init(userName);
 
-  readline.on('line', handleAppInput(userName));
-  readline.on('close', handleAppClose(userName));
+  readline.on('line', appInputHandler);
+  readline.on('close', appCloseHandler(userName));
 };

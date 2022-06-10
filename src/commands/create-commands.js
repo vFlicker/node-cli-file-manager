@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as app from './app/index.js';
 import * as files from './files/index.js';
 import * as hash from './hash/index.js';
@@ -5,11 +6,11 @@ import * as navigate from './navigate/index.js';
 import * as os from './os/index.js';
 import * as zip from './zip/index.js';
 
-export const createCommands = (userName, commandData) => {
+export const createCommands = (commandData) => {
   const commands = new Map();
 
   // App
-  commands.set(app.CloseCommand.commandName, new app.CloseCommand(userName));
+  commands.set(app.CloseCommand.commandName, new app.CloseCommand());
 
   // Navigate
   commands.set(navigate.CdCommand.commandName, new navigate.CdCommand(commandData));
