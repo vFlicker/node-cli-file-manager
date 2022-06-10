@@ -3,7 +3,7 @@ import * as files from './files/index.js';
 import * as hash from './hash/index.js';
 import * as navigate from './navigate/index.js';
 import * as os from './os/index.js';
-// import * as zip from './zip/index.js';
+import * as zip from './zip/index.js';
 
 export const createCommands = (userName, commandData) => {
   const commands = new Map();
@@ -29,6 +29,9 @@ export const createCommands = (userName, commandData) => {
 
   // Hash
   commands.set(hash.HashCommand.commandName, new hash.HashCommand(commandData));
+
+  // Zip
+  commands.set(zip.CompressCommand.commandName, new zip.CompressCommand(commandData));
 
   return commands;
 };
