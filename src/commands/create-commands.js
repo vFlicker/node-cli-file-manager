@@ -1,6 +1,6 @@
 import * as app from './app/index.js';
 import * as files from './files/index.js';
-// import * as hash from './hash/index.js';
+import * as hash from './hash/index.js';
 import * as navigate from './navigate/index.js';
 import * as os from './os/index.js';
 // import * as zip from './zip/index.js';
@@ -26,6 +26,9 @@ export const createCommands = (userName, commandData) => {
 
   // OS
   commands.set(os.OsCommand.commandName, new os.OsCommand(commandData));
+
+  // Hash
+  commands.set(hash.HashCommand.commandName, new hash.HashCommand(commandData));
 
   return commands;
 };
