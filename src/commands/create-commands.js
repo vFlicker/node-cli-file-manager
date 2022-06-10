@@ -32,6 +32,7 @@ export const createCommands = (userName, commandData) => {
 
   // Zip
   commands.set(zip.CompressCommand.commandName, new zip.CompressCommand(commandData));
+  commands.set(zip.DecompressCommand.commandName, new zip.DecompressCommand(commandData));
 
   return commands;
 };
