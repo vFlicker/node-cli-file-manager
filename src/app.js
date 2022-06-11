@@ -11,13 +11,14 @@ import {
   write,
 } from './utils/index.js';
 
-const init = (userName) => {
+const init = (userName, readline) => {
   setHomeDir();
   write(stdoutText.sayHello(userName));
   write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
+  readline.prompt();
 };
 
-const appInputHandler = async (line) => {
+const appInputHandler = (readline) => async (line) => {
   const [commandName, ...commandData] = line.split(' ');
   const commands = createCommands(commandData);
   const command = commands.get(commandName);
@@ -29,6 +30,7 @@ const appInputHandler = async (line) => {
   }
 
   write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
+  readline.prompt();
 };
 
 const appCloseHandler = (userName) => () => {
@@ -40,8 +42,8 @@ export const app = () => {
   const userName = getUserName();
   const readline = createInterface({ input, output });
 
-  init(userName);
+  init(userName, readline);
 
-  readline.on('line', appInputHandler);
+  readline.on('line', appInputHandler(readline));
   readline.on('close', appCloseHandler(userName));
 };
