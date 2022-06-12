@@ -6,6 +6,7 @@ import {
   closeApp,
   getWorkingDirectory,
   getUserName,
+  parseStringWithSpaces,
   setHomeDir,
   stdoutText,
   write,
@@ -20,7 +21,8 @@ const init = (userName, readline) => {
 
 const appInputHandler = (readline) => async (line) => {
   const [commandName, ...commandData] = line.split(' ');
-  const commands = createCommands(commandData);
+  const parsedCommandData = parseStringWithSpaces(commandData);
+  const commands = createCommands(parsedCommandData);
   const command = commands.get(commandName);
 
   if (!command) {
