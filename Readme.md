@@ -4,6 +4,11 @@
 2. Deadline date: 2022-06-12 23:59
 3. Self-test: all items are completed (total score: 320):
 
+### Important
+if a folder or file name contains spaces, enclose the name in double quotes
+
+- `cp Readme.md "new folder"` or `add ./folder/"new folder"/"new file".txt`
+
 ### Examples of using commands
 
 navigation:
