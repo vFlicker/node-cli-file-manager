@@ -5,12 +5,12 @@ import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
 import { AbstractCommand } from '../abstract-command.js';
 
 export class CatCommand extends AbstractCommand {
-  #fileName = '';
+  #filePath = '';
 
-  constructor([fileName]) {
+  constructor([filePath]) {
     super();
 
-    this.#fileName = fileName;
+    this.#filePath = filePath;
   }
 
   static get commandName() {
@@ -18,10 +18,9 @@ export class CatCommand extends AbstractCommand {
   }
 
   async execute() {
-    const filePath = path.resolve(getWorkingDirectory(), this.#fileName);
-    const readableStream = createReadStream(filePath, 'utf8');
-
     try {
+      const filePath = path.resolve(getWorkingDirectory(), this.#filePath);
+      const readableStream = createReadStream(filePath, 'utf8');
       for await (const line of readableStream) write(line);
     } catch (error) {
       write(stdoutText.sayFailed());

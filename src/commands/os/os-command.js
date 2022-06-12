@@ -53,13 +53,20 @@ export class OsCommand extends AbstractCommand {
     const CPUsCount = cpus.length;
 
     for (let index = 0; index < CPUsCount; index++) {
-      const cpu = cpus[index];
+      const { model, speed } = cpus[index];
       formattedCPUsData[index + 1] = {
-        model: cpu.model.split(' CPU')[0],
-        speed: cpu.speed / 1000 + ' GHz',
+        model: model.split(' CPU')[0],
+        speed: `${this.#getCpuSpeed(speed)} GHz`,
       };
     }
 
     return [formattedCPUsData, CPUsCount];
+  }
+
+  #getCpuSpeed(speed) {
+    console.log(speed);
+    const isSpeedInHz = speed >= 100;
+    if (isSpeedInHz) return speed / 1000;
+    return speed / 10;
   }
 }

@@ -7,13 +7,13 @@ import { AbstractCommand } from '../abstract-command.js';
 
 export class MvCommand extends AbstractCommand {
   #filePath = '';
-  #newDir = '';
+  #newDirPath = '';
 
-  constructor([filePath, newDir]) {
+  constructor([filePath, newDirPath]) {
     super();
 
     this.#filePath = filePath;
-    this.#newDir = newDir;
+    this.#newDirPath = newDirPath;
   }
 
   static get commandName() {
@@ -22,15 +22,19 @@ export class MvCommand extends AbstractCommand {
 
   async execute() {
     const workingDirectory = getWorkingDirectory();
-    const filePath = path.resolve(workingDirectory, this.#filePath);
-    const fileName = path.basename(filePath);
-    const newDir = path.resolve(workingDirectory, this.#newDir, fileName);
 
     try {
+      const filePath = path.resolve(workingDirectory, this.#filePath);
+      const fileName = path.basename(filePath);
+      const newDirPath = path.resolve(
+        workingDirectory,
+        this.#newDirPath,
+        fileName,
+      );
       const stats = await stat(filePath);
       if (stats.isDirectory()) throw new Error('cp: cannot copy directories');
       const readableStream = createReadStream(filePath);
-      const writeStream = createWriteStream(newDir);
+      const writeStream = createWriteStream(newDirPath);
       return await new Promise((resolve, reject) => {
         readableStream.on('error', reject);
         readableStream.on('end', async () => {

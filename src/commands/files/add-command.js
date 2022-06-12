@@ -5,12 +5,12 @@ import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
 import { AbstractCommand } from '../abstract-command.js';
 
 export class AddCommand extends AbstractCommand {
-  #fileName = '';
+  #filePath = '';
 
-  constructor([fileName]) {
+  constructor([filePath]) {
     super();
 
-    this.#fileName = fileName;
+    this.#filePath = filePath;
   }
 
   static get commandName() {
@@ -18,9 +18,8 @@ export class AddCommand extends AbstractCommand {
   }
 
   async execute() {
-    const filePath = path.resolve(getWorkingDirectory(), this.#fileName);
-
     try {
+      const filePath = path.resolve(getWorkingDirectory(), this.#filePath);
       await writeFile(filePath, '', { flag: 'wx' });
     } catch (err) {
       write(stdoutText.sayFailed());

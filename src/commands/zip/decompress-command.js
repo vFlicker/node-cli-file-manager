@@ -25,12 +25,17 @@ export class DecompressCommand extends AbstractCommand {
   async execute() {
     const pipelinePromise = promisify(pipeline);
     const workingDirectory = getWorkingDirectory();
-    const inputFilePath = path.resolve(workingDirectory, this.#zipFilePath);
-    const outputFilePath = path.resolve(workingDirectory, this.#newFilePath);
-    const readable = createReadStream(inputFilePath);
-    const writable = createWriteStream(outputFilePath);
 
     try {
+      const filePath = path.resolve(workingDirectory, this.#zipFilePath);
+      const fileName = path.basename(filePath).split('.gz')[0];
+      const newDirPath = path.resolve(
+        workingDirectory,
+        this.#newFilePath,
+        fileName,
+      );
+      const readable = createReadStream(filePath);
+      const writable = createWriteStream(newDirPath);
       await pipelinePromise(readable, createBrotliDecompress(), writable);
     } catch (err) {
       write(stdoutText.sayFailed());

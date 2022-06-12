@@ -25,12 +25,17 @@ export class CompressCommand extends AbstractCommand {
   async execute() {
     const pipelinePromise = promisify(pipeline);
     const workingDirectory = getWorkingDirectory();
-    const inputFilePath = path.resolve(workingDirectory, this.#filePath);
-    const outputFilePath = path.resolve(workingDirectory, this.#newZipFilePath);
-    const readable = createReadStream(inputFilePath);
-    const writable = createWriteStream(outputFilePath);
 
     try {
+      const filePath = path.resolve(workingDirectory, this.#filePath);
+      const fileName = path.basename(filePath);
+      const newDirPath = path.resolve(
+        workingDirectory,
+        this.#newZipFilePath,
+        `${fileName}.gz`,
+      );
+      const readable = createReadStream(filePath);
+      const writable = createWriteStream(newDirPath);
       await pipelinePromise(readable, createBrotliCompress(), writable);
     } catch (err) {
       write(stdoutText.sayFailed());

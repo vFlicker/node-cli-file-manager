@@ -5,13 +5,13 @@ import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
 import { AbstractCommand } from '../abstract-command.js';
 
 export class RnCommand extends AbstractCommand {
-  #filePath = '';
+  #fileName = '';
   #newFileName = '';
 
-  constructor([filePath, newFileName]) {
+  constructor([fileName, newFileName]) {
     super();
 
-    this.#filePath = filePath;
+    this.#fileName = fileName;
     this.#newFileName = newFileName;
   }
 
@@ -20,10 +20,8 @@ export class RnCommand extends AbstractCommand {
   }
 
   async execute() {
-    const workingDirectory = getWorkingDirectory();
-    const filePath = path.resolve(workingDirectory, this.#filePath);
-
     try {
+      const filePath = path.resolve(getWorkingDirectory(), this.#fileName);
       await rename(filePath, this.#newFileName);
     } catch (err) {
       write(stdoutText.sayFailed());
