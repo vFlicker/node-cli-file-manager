@@ -18,8 +18,7 @@ export class CatCommand extends AbstractCommand {
   }
 
   async execute() {
-    const workingDirectory = getWorkingDirectory();
-    const filePath = path.resolve(workingDirectory, this.#fileName);
+    const filePath = path.resolve(getWorkingDirectory(), this.#fileName);
     const readableStream = createReadStream(filePath, 'utf8');
 
     try {

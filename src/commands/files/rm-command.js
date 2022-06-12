@@ -18,9 +18,10 @@ export class RmCommand extends AbstractCommand {
   }
 
   async execute() {
+    const workingDirectory = getWorkingDirectory();
+    const filePath = path.resolve(workingDirectory, this.#filePath);
+
     try {
-      const workingDirectory = getWorkingDirectory();
-      const filePath = path.resolve(workingDirectory, this.#filePath);
       await unlink(filePath);
     } catch (err) {
       write(stdoutText.sayFailed());

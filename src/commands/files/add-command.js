@@ -18,9 +18,9 @@ export class AddCommand extends AbstractCommand {
   }
 
   async execute() {
+    const filePath = path.resolve(getWorkingDirectory(), this.#fileName);
+
     try {
-      const workingDirectory = getWorkingDirectory();
-      const filePath = path.resolve(workingDirectory, this.#fileName);
       await writeFile(filePath, '', { flag: 'wx' });
     } catch (err) {
       write(stdoutText.sayFailed());

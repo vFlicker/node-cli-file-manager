@@ -20,9 +20,10 @@ export class RnCommand extends AbstractCommand {
   }
 
   async execute() {
+    const workingDirectory = getWorkingDirectory();
+    const filePath = path.resolve(workingDirectory, this.#filePath);
+
     try {
-      const workingDirectory = getWorkingDirectory();
-      const filePath = path.resolve(workingDirectory, this.#filePath);
       await rename(filePath, this.#newFileName);
     } catch (err) {
       write(stdoutText.sayFailed());
