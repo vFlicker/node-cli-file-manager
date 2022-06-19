@@ -1,30 +1,13 @@
-import path from 'path';
+import { resolve } from 'path';
 import { rename } from 'node:fs/promises';
 
 import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
-import { AbstractCommand } from '../abstract-command.js';
 
-export class RnCommand extends AbstractCommand {
-  #fileName = '';
-  #newFileName = '';
-
-  constructor([fileName, newFileName]) {
-    super();
-
-    this.#fileName = fileName;
-    this.#newFileName = newFileName;
+export const rn = async (fileName, newFileName) => {
+  try {
+    const filePath = resolve(getWorkingDirectory(), fileName);
+    await rename(filePath, newFileName);
+  } catch (err) {
+    write(stdoutText.sayFailed());
   }
-
-  static get commandName() {
-    return 'rn';
-  }
-
-  async execute() {
-    try {
-      const filePath = path.resolve(getWorkingDirectory(), this.#fileName);
-      await rename(filePath, this.#newFileName);
-    } catch (err) {
-      write(stdoutText.sayFailed());
-    }
-  }
-}
+};

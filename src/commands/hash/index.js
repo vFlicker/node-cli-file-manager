@@ -1,1 +1,1 @@
-export { HashCommand } from './hash-command.js';
+export { hash } from './hash-command.js';

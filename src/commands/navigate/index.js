@@ -1,3 +1,3 @@
-export { CdCommand } from './cd-command.js';
-export { LsCommand } from './ls-command.js';
-export { UpCommand } from './up-command.js';
+export { cd } from './cd-command.js';
+export { ls } from './ls-command.js';
+export { up } from './up-command.js';

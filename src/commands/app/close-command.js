@@ -1,14 +1,13 @@
 import { closeApp, getUserName, stdoutText, write } from '../../utils/index.js';
-import { AbstractCommand } from '../abstract-command.js';
 
-export class CloseCommand extends AbstractCommand {
-  static get commandName() {
+export const close = async () => {
+  const userName = getUserName();
+  write(stdoutText.sayGoodbye(userName));
+  closeApp();
+};
+
+Object.defineProperty(close, 'name', {
+  get: function () {
     return '.exit';
-  }
-
-  async execute() {
-    const userName = getUserName();
-    write(stdoutText.sayGoodbye(userName));
-    closeApp();
-  }
-}
+  },
+});

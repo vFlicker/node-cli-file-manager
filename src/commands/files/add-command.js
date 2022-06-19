@@ -1,28 +1,13 @@
-import path from 'path';
+import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
 
 import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
-import { AbstractCommand } from '../abstract-command.js';
 
-export class AddCommand extends AbstractCommand {
-  #filePath = '';
-
-  constructor([filePath]) {
-    super();
-
-    this.#filePath = filePath;
+export const add = async (filePath) => {
+  try {
+    const path = resolve(getWorkingDirectory(), filePath);
+    await writeFile(path, '', { flag: 'wx' });
+  } catch (err) {
+    write(stdoutText.sayFailed());
   }
-
-  static get commandName() {
-    return 'add';
-  }
-
-  async execute() {
-    try {
-      const filePath = path.resolve(getWorkingDirectory(), this.#filePath);
-      await writeFile(filePath, '', { flag: 'wx' });
-    } catch (err) {
-      write(stdoutText.sayFailed());
-    }
-  }
-}
+};

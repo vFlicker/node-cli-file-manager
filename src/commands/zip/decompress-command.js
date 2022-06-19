@@ -1,44 +1,23 @@
-import path from 'path';
+import { basename, resolve } from 'path';
 import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from 'stream';
 import { promisify } from 'util';
 import { createBrotliDecompress } from 'zlib';
 
 import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
-import { AbstractCommand } from '../abstract-command.js';
 
-export class DecompressCommand extends AbstractCommand {
-  #zipFilePath = '';
-  #newFilePath = '';
+export const decompress = async (path, newPath) => {
+  const pipelinePromise = promisify(pipeline);
+  const workingDirectory = getWorkingDirectory();
 
-  constructor([zipFilePath, newFilePath]) {
-    super();
-
-    this.#zipFilePath = zipFilePath;
-    this.#newFilePath = newFilePath;
+  try {
+    const filePath = resolve(workingDirectory, path);
+    const fileName = basename(filePath).split('.gz')[0];
+    const newDirPath = resolve(workingDirectory, newPath, fileName);
+    const readable = createReadStream(filePath);
+    const writable = createWriteStream(newDirPath);
+    await pipelinePromise(readable, createBrotliDecompress(), writable);
+  } catch (err) {
+    write(stdoutText.sayFailed());
   }
-
-  static get commandName() {
-    return 'decompress';
-  }
-
-  async execute() {
-    const pipelinePromise = promisify(pipeline);
-    const workingDirectory = getWorkingDirectory();
-
-    try {
-      const filePath = path.resolve(workingDirectory, this.#zipFilePath);
-      const fileName = path.basename(filePath).split('.gz')[0];
-      const newDirPath = path.resolve(
-        workingDirectory,
-        this.#newFilePath,
-        fileName,
-      );
-      const readable = createReadStream(filePath);
-      const writable = createWriteStream(newDirPath);
-      await pipelinePromise(readable, createBrotliDecompress(), writable);
-    } catch (err) {
-      write(stdoutText.sayFailed());
-    }
-  }
-}
+};

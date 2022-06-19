@@ -12,6 +12,8 @@ import {
   write,
 } from './utils/index.js';
 
+const commands = createCommands();
+
 const init = (userName, readline) => {
   setHomeDir();
   write(stdoutText.sayHello(userName));
@@ -22,13 +24,12 @@ const init = (userName, readline) => {
 const appInputHandler = (readline) => async (line) => {
   const [commandName, ...commandData] = line.split(' ');
   const parsedCommandData = parseStringWithSpaces(commandData);
-  const commands = createCommands(parsedCommandData);
   const command = commands.get(commandName);
 
   if (!command) {
     write(stdoutText.sayInvalidInput(commandName));
   } else {
-    await command.execute();
+    await command(...parsedCommandData);
   }
 
   write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
