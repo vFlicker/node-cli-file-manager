@@ -1,14 +1,11 @@
-import { readdir } from 'node:fs/promises';
+import { readdir } from 'fs/promises';
+import { EOL } from 'os';
 
-import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
+import { getWorkingDirectory, write } from '../../utils/index.js';
 
 export const ls = async () => {
-  try {
-    const files = await readdir(getWorkingDirectory());
-    const filesNames = [];
-    for (const file of files) filesNames.push(file);
-    write(filesNames);
-  } catch (err) {
-    write(stdoutText.sayFailed());
-  }
+  const files = await readdir(getWorkingDirectory());
+  const filesNames = [];
+  for (const file of files) filesNames.push(file);
+  write(filesNames.join(EOL), 'success');
 };

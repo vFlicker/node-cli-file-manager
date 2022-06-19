@@ -1,13 +1,9 @@
 import { resolve } from 'path';
-import { unlink } from 'node:fs/promises';
+import { unlink } from 'fs/promises';
 
-import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
+import { getWorkingDirectory } from '../../utils/index.js';
 
 export const rm = async (path) => {
-  try {
-    const filePath = resolve(getWorkingDirectory(), path);
-    await unlink(filePath);
-  } catch (err) {
-    write(stdoutText.sayFailed());
-  }
+  const filePath = resolve(getWorkingDirectory(), path);
+  await unlink(filePath);
 };

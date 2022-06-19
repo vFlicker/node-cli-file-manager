@@ -27,9 +27,13 @@ const appInputHandler = (readline) => async (line) => {
   const command = commands.get(commandName);
 
   if (!command) {
-    write(stdoutText.sayInvalidInput(commandName));
+    write(stdoutText.sayInvalidInput(commandName), 'error');
   } else {
-    await command(...parsedCommandData);
+    try {
+      await command(...parsedCommandData);
+    } catch (err) {
+      write(stdoutText.sayFailed(), 'error');
+    }
   }
 
   write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));

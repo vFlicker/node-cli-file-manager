@@ -9,6 +9,6 @@ export const hash = async (path) => {
   const hash = createHash('sha256');
   const readable = createReadStream(filePath);
   readable.on('data', (chunk) => hash.update(chunk));
-  readable.on('end', () => write(hash.digest('hex')));
-  readable.on('error', () => write(stdoutText.sayFailed()));
+  readable.on('end', () => write(hash.digest('hex'), 'success'));
+  readable.on('error', () => write(stdoutText.sayFailed(), 'error'));
 };
