@@ -16,7 +16,7 @@ files:
 - `add new-file.txt`, `add ./folder/new-file.txt`
 - `rn readme.md renamed-readme.md`
 - `cp readme.md src`, `cp ./folder/readme.md .`
-- `mv readme.md src mv`, `mv ./folder/readme.md .`
+- `mv readme.md src`, `mv ./folder/readme.md .`
 - `rm readme.md`, `rm ./folder/readme.md`
 
 operating system:
