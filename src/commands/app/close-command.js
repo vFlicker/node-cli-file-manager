@@ -1,8 +1,6 @@
-import { closeApp, getUserName, stdoutText, write } from '../../utils/index.js';
+import { closeApp } from '../../utils/index.js';
 
 export const close = async () => {
-  const userName = getUserName();
-  write(stdoutText.sayGoodbye(userName));
   closeApp();
 };
 

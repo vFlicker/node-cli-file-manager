@@ -1,11 +1,6 @@
 import { arch, EOL, userInfo } from 'os';
 
-import {
-  HOME_DIR,
-  stdoutText,
-  write,
-  writeInTable,
-} from '../../utils/index.js';
+import { HOME_DIR, write, writeInTable } from '../../utils/index.js';
 import { Flags } from './constants.js';
 import { getCPUs } from './utils.js';
 
@@ -30,7 +25,7 @@ export const os = async (arg) => {
       write(`This processor architecture is ${arch()}`, 'success');
       break;
     default:
-      write(stdoutText.sayFailed(), 'error');
+      write('Operation failed', 'error');
       break;
   }
 };

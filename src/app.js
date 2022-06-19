@@ -8,16 +8,19 @@ import {
   getUserName,
   parseStringWithSpaces,
   setHomeDir,
-  stdoutText,
   write,
 } from './utils/index.js';
 
 const commands = createCommands();
+const writeCurrentlyDirectory = () => {
+  write(`You are currently in ${getWorkingDirectory()}`);
+};
 
-const init = (userName, readline) => {
+const init = (readline) => {
+  const userName = getUserName();
   setHomeDir();
-  write(stdoutText.sayHello(userName));
-  write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
+  write(`Welcome to the File Manager, ${userName}!`, 'important');
+  writeCurrentlyDirectory();
   readline.prompt();
 };
 
@@ -27,30 +30,24 @@ const appInputHandler = (readline) => async (line) => {
   const command = commands.get(commandName);
 
   if (!command) {
-    write(stdoutText.sayInvalidInput(commandName), 'error');
+    write(`Invalid input: ${commandName}`, 'error');
   } else {
     try {
       await command(...parsedCommandData);
     } catch (err) {
-      write(stdoutText.sayFailed(), 'error');
+      write('Operation failed', 'error');
     }
   }
 
-  write(stdoutText.sayCurrentlyDirectory(getWorkingDirectory()));
+  writeCurrentlyDirectory();
   readline.prompt();
 };
 
-const appCloseHandler = (userName) => () => {
-  write(stdoutText.sayGoodbye(userName));
-  closeApp();
-};
-
 export const app = () => {
-  const userName = getUserName();
   const readline = createInterface({ input, output });
 
-  init(userName, readline);
+  init(readline);
 
   readline.on('line', appInputHandler(readline));
-  readline.on('close', appCloseHandler(userName));
+  readline.on('close', closeApp);
 };

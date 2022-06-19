@@ -1,6 +1,7 @@
 const Colors = {
   RED: 31,
   GREEN: 32,
+  BLUE: 34,
 };
 
 const getColoredText = (text, color) => {
@@ -11,6 +12,9 @@ export const write = (text, flag) => {
   switch (flag) {
     case 'success':
       console.log(getColoredText(text, Colors.GREEN));
+      break;
+    case 'important':
+      console.log(getColoredText(text, Colors.BLUE));
       break;
     case 'error':
       console.log(getColoredText(text, Colors.RED));
