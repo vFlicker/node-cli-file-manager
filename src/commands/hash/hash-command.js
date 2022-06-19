@@ -1,14 +1,14 @@
 import { resolve } from 'path';
 import { createHash } from 'crypto';
 import { createReadStream } from 'fs';
+import { pipeline } from 'stream/promises';
 
-import { getWorkingDirectory, stdoutText, write } from '../../utils/index.js';
+import { getWorkingDirectory, write } from '../../utils/index.js';
 
 export const hash = async (path) => {
   const filePath = resolve(getWorkingDirectory(), path);
-  const hash = createHash('sha256');
-  const readable = createReadStream(filePath);
-  readable.on('data', (chunk) => hash.update(chunk));
-  readable.on('end', () => write(hash.digest('hex'), 'success'));
-  readable.on('error', () => write(stdoutText.sayFailed(), 'error'));
+  const readStream = createReadStream(filePath);
+  const hashStream = createHash('sha256');
+  await pipeline(readStream, hashStream);
+  write(hashStream.digest('hex'), 'success');
 };
