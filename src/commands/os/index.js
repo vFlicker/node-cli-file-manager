@@ -1,1 +1,1 @@
-export { os } from './os-command.js';
+export { os } from './os.js';

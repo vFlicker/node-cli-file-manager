@@ -1,1 +1,1 @@
-export { close } from './close-command.js';
+export { close } from './close.js';
