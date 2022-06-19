@@ -1,30 +1,23 @@
-## Node.js application
-
-1. Link to the task: https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/file-manager/assignment.md
-2. Deadline date: 2022-06-12 23:59
-3. Self-test: all items are completed (total score: 320):
-
-### Important
-if a folder or file name contains spaces, enclose the name in double quotes
-
-- `cp Readme.md "new folder"` or `add ./folder/"new folder"/"new file".txt`
+## CLI application
 
 ### Examples of using commands
 
-navigation:
+start app and set username:
+- `npm run start -- --username=your_username`
 
+navigation:
 - `up`
-- `cd /users` or `cd ./folder`
+- `cd /users`, `cd ./folder`
 - `ls`
 
 files:
 
-- `cat readme.md` or `cat ./folder/readme.md`
-- `add new-file.txt` or `add ./folder/new-file.txt`
+- `cat readme.md`, `cat ./folder/readme.md`
+- `add new-file.txt`, `add ./folder/new-file.txt`
 - `rn readme.md renamed-readme.md`
-- `cp readme.md src` or `cp ./folder/readme.md .`
-- `mv readme.md src mv` or `mv ./folder/readme.md .`
-- `rm readme.md` or `rm ./folder/readme.md`
+- `cp readme.md src`, `cp ./folder/readme.md .`
+- `mv readme.md src mv`, `mv ./folder/readme.md .`
+- `rm readme.md`, `rm ./folder/readme.md`
 
 operating system:
 
@@ -36,9 +29,9 @@ operating system:
 
 hash:
 
-- `hash readme.md` or `hash ./folder/readme.md`
+- `hash readme.md`, `hash ./folder/readme.md`
 
 zip:
 
-- `compress readme.md src` or `compress ./folder/readme.md .`
-- `decompress readme.md.gz src` or `decompress ./folder/readme.md.gz .`
+- `compress readme.md src`, `compress ./folder/readme.md .`
+- `decompress readme.md.gz src`, `decompress ./folder/readme.md.gz .`
