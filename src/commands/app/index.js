@@ -1,1 +1,1 @@
-export { close } from './close.js';
+export * from './close.js';

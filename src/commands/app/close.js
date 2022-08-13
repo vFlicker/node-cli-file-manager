@@ -1,11 +1,5 @@
-import { closeApp } from '../../utils/index.js';
+import { closeApp, changeCommandName } from '../../utils/index.js';
 
-export const close = async () => {
-  closeApp();
-};
+export const close = () => closeApp();
 
-Object.defineProperty(close, 'name', {
-  get: function () {
-    return '.exit';
-  },
-});
+changeCommandName(close, '.exit');

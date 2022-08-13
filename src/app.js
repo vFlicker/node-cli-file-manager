@@ -1,7 +1,7 @@
 import { stdin as input, stdout as output } from 'process';
 import { createInterface } from 'readline';
 
-import { createCommands } from './commands/index.js';
+import { createCommands } from './utils/index.js';
 import {
   closeApp,
   getWorkingDirectory,
