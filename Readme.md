@@ -1,37 +1,133 @@
-## CLI application
+# CLI application
 
-### Examples of using commands
+## Downloading
 
-start app and set username:
-- `npm run start -- --username=your_username`
+```
+git clone {repository URL}
+```
 
-navigation:
-- `up`
-- `cd /users`, `cd ./folder`
-- `ls`
+## Installing NPM modules
 
-files:
+```
+npm install
+```
 
-- `cat readme.md`, `cat ./folder/readme.md`
-- `add new-file.txt`, `add ./folder/new-file.txt`
-- `rn readme.md renamed-readme.md`
-- `cp readme.md src`, `cp ./folder/readme.md .`
-- `mv readme.md src`, `mv ./folder/readme.md .`
-- `rm readme.md`, `rm ./folder/readme.md`
+## Running application
 
-operating system:
+```
+npm run start -- --username=your_username
+```
 
-- `os --EOL`
-- `os --cpus`
-- `os --homedir`
-- `os --username`
-- `os --architecture`
+## Examples of using commands
 
-hash:
+### Navigation & working directory
 
-- `hash readme.md`, `hash ./folder/readme.md`
+Go upper from current directory
 
-zip:
+```
+up
+```
 
-- `compress readme.md src`, `compress ./folder/readme.md .`
-- `decompress readme.md.gz src`, `decompress ./folder/readme.md.gz .`
+Go to dedicated folder from current directory
+
+```
+cd path_to_directory
+```
+
+List all files and folder in current directory
+
+```
+ls
+```
+
+### Operations with files
+
+Read file
+
+```
+cat path_to_file
+```
+
+Create empty file in current working directory
+
+```
+add new_file_name
+```
+
+Rename file
+
+```
+rn path_to_file new_filename
+```
+
+Copy file
+
+```
+cp path_to_file path_to_new_directory
+```
+
+Move file
+
+```
+mv path_to_file path_to_new_directory
+```
+
+Delete file
+
+```
+rm path_to_file
+```
+
+### Operating system
+
+Get EOL
+
+```
+os --EOL
+```
+
+Get host machine CPUs info
+
+```
+os --cpus
+```
+
+Get home directory
+
+```
+os --homedir
+```
+
+Get current system user name
+
+```
+os --username
+```
+
+Get CPU architecture
+
+```
+os --architecture
+```
+
+### Hash
+
+Calculate hash for file
+
+```
+hash path_to_file
+```
+
+### Zip
+
+Compress file
+
+```
+compress path_to_file path_to_destination
+```
+
+Decompress file
+
+```
+decompress path_to_file path_to_destination
+```
