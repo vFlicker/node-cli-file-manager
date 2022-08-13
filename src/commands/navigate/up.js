@@ -1,5 +1,3 @@
 import { changeDir } from '../../utils/index.js';
 
-export const up = async () => {
-  changeDir('..');
-};
+export const up = () => changeDir('..');

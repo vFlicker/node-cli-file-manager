@@ -13,14 +13,14 @@ import {
 } from './utils/index.js';
 
 const commands = createCommands();
+
 const writeCurrentlyDirectory = () => {
   write(`You are currently in ${getWorkingDirectory()}`);
 };
 
 const init = (readline) => {
-  const userName = getUserName();
   setHomeDir();
-  write(`Welcome to the File Manager, ${userName}!`, WriteFlag.IMPORTANT);
+  write(`Welcome to the File Manager, ${getUserName()}!`, WriteFlag.IMPORTANT);
   writeCurrentlyDirectory();
   readline.prompt();
 };
@@ -33,6 +33,7 @@ const appInputHandler = (readline) => async (line) => {
   if (!command) {
     write(`Invalid input: ${commandName}`, WriteFlag.ERROR);
   } else {
+    // TODO: create function to handle command
     try {
       await command(...parsedCommandData);
     } catch (err) {

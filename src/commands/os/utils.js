@@ -1,7 +1,6 @@
 import os from 'os';
 
 const getCpuSpeed = (speed) => {
-  console.log(speed);
   const isSpeedInHz = speed >= 100;
   if (isSpeedInHz) return speed / 1000;
   return speed / 10;

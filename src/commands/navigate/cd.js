@@ -1,5 +1,3 @@
 import { changeDir } from '../../utils/index.js';
 
-export const cd = async (path) => {
-  changeDir(path);
-};
+export const cd = (path) => changeDir(path);

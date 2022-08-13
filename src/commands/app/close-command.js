@@ -1,6 +1,6 @@
 import { closeApp } from '../../utils/index.js';
 
-export const close = async () => {
+export const close = () => {
   closeApp();
 };
 

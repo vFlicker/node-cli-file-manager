@@ -1,3 +1,3 @@
-export { cd } from './cd.js';
-export { ls } from './ls.js';
-export { up } from './up.js';
+export * from './cd.js';
+export * from './ls.js';
+export * from './up.js';

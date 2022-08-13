@@ -1,7 +1,7 @@
 import { readdir } from 'fs/promises';
 import { EOL } from 'os';
 
-import { getWorkingDirectory, write } from '../../utils/index.js';
+import { getWorkingDirectory, write, WriteFlag } from '../../utils/index.js';
 
 export const ls = async () => {
   const files = await readdir(getWorkingDirectory());

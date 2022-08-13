@@ -1,6 +1,6 @@
-export { add } from './add.js';
-export { cat } from './cat.js';
-export { cp } from './cp.js';
-export { mv } from './mv.js';
-export { rm } from './rm.js';
-export { rn } from './rn.js';
+export * from './add.js';
+export * from './cat.js';
+export * from './cp.js';
+export * from './mv.js';
+export * from './rm.js';
+export * from './rn.js';
