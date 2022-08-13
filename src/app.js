@@ -33,7 +33,6 @@ const appInputHandler = (readline) => async (line) => {
   if (!command) {
     write(`Invalid input: ${commandName}`, WriteFlag.ERROR);
   } else {
-    // TODO: create function to handle command
     try {
       await command(...parsedCommandData);
     } catch (err) {
