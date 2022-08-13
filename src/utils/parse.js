@@ -1,8 +1,8 @@
 export const parseStringWithSpaces = (data) => {
   const string = data.join(' ');
   const result = [];
-  let current = '';
   let quote = false;
+  let current = '';
 
   for (const char of string) {
     if (char === '"') {

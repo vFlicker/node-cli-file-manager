@@ -4,19 +4,23 @@ const Colors = {
   BLUE: 34,
 };
 
-const getColoredText = (text, color) => {
-  return `\x1B[${color}m${text}\x1B[0m`;
+const getColoredText = (text, color) => `\x1B[${color}m${text}\x1B[0m`;
+
+export const WriteFlag = {
+  SUCCESS: 'success',
+  IMPORTANT: 'important',
+  ERROR: 'error',
 };
 
 export const write = (text, flag) => {
   switch (flag) {
-    case 'success':
+    case WriteFlag.SUCCESS:
       console.log(getColoredText(text, Colors.GREEN));
       break;
-    case 'important':
+    case WriteFlag.IMPORTANT:
       console.log(getColoredText(text, Colors.BLUE));
       break;
-    case 'error':
+    case WriteFlag.ERROR:
       console.log(getColoredText(text, Colors.RED));
       break;
     default:
@@ -25,6 +29,4 @@ export const write = (text, flag) => {
   }
 };
 
-export const writeInTable = (data) => {
-  console.table(data);
-};
+export const writeInTable = (data) => console.table(data);

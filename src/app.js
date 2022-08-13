@@ -1,7 +1,7 @@
 import { stdin as input, stdout as output } from 'process';
 import { createInterface } from 'readline';
-import { createCommands } from './commands/index.js';
 
+import { createCommands } from './commands/index.js';
 import {
   closeApp,
   getWorkingDirectory,
@@ -9,6 +9,7 @@ import {
   parseStringWithSpaces,
   setHomeDir,
   write,
+  WriteFlag,
 } from './utils/index.js';
 
 const commands = createCommands();
@@ -19,7 +20,7 @@ const writeCurrentlyDirectory = () => {
 const init = (readline) => {
   const userName = getUserName();
   setHomeDir();
-  write(`Welcome to the File Manager, ${userName}!`, 'important');
+  write(`Welcome to the File Manager, ${userName}!`, WriteFlag.IMPORTANT);
   writeCurrentlyDirectory();
   readline.prompt();
 };
@@ -30,12 +31,12 @@ const appInputHandler = (readline) => async (line) => {
   const command = commands.get(commandName);
 
   if (!command) {
-    write(`Invalid input: ${commandName}`, 'error');
+    write(`Invalid input: ${commandName}`, WriteFlag.ERROR);
   } else {
     try {
       await command(...parsedCommandData);
     } catch (err) {
-      write('Operation failed', 'error');
+      write('Operation failed', WriteFlag.ERROR);
     }
   }
 
